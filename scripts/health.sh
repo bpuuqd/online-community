@@ -33,6 +33,8 @@ do
     echo "> cancel connecting to Nginx and stop deploying"
     exit 1
   fi
+
   echo "> fail to connecting to Health check. retry... "
   sleep 10
 done
+
