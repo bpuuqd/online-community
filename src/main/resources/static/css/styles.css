@@ -1,0 +1,86 @@
+body {
+    font-family: 'Nanum Gothic', sans-serif;
+    font-family: 'Nanum Myeongjo', serif;
+}
+
+/*naver login btn*/
+.btn-secondary:not(:disabled):not(.disabled).active, .btn-secondary:not(:disabled):not(.disabled):active, .show>.btn-secondary.dropdown-toggle{
+        background-color: #2DB400 !important;
+        border-color : #2DB400 !important;
+        font-weight: bold;
+        font-size: 17px;
+
+}
+
+/*google login btn*/
+.btn-success:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle{
+        background-color: #1a73e8;
+        border-color : #1a73e8;
+        font-weight: bold;
+        font-size: 17px;
+
+}
+
+/*post btn*/
+.btn-primary {
+        background: #bad3ba;
+        border-color : #bad3ba;
+        font-size : 18px;
+
+}
+
+
+h1 {
+    padding : 10px;
+    margin-bottom : 0px;
+}
+
+
+.mainHeader {
+        color : #A69E81;
+        font-weight: 700;
+        font-size: 50px;
+        text-align: center;
+}
+
+/*top btns*/
+.col-md-6 {
+        margin-bottom: 10px;
+        padding : 10px;
+        max-width: 100%;
+        flex: auto;
+}
+
+.table {
+    padding: 5px;
+}
+
+/*social login btns*/
+.login-btns {
+    float:right;
+}
+
+/*table header*/
+.th-span1 {
+        width: 15%;
+}
+
+.th-span2 {
+        width: 40%
+}
+.th-span3 {
+        width: 25%
+}
+.th-span4 {
+        width: 20%
+}
+
+.post-title{
+       color : #A69E81;
+        font-weight: 700;
+        font-size: 50px;
+}
+
+.col-md-4 {
+        max-width: none;
+}
