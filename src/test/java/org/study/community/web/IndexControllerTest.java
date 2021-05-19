@@ -24,6 +24,6 @@ public class IndexControllerTest {
         String body = this.restTemplate.getForObject("/",String.class);
 
         //then
-        assertThat(body).contains("모두의 대나무 숲");
+        assertThat(body).contains("당신의 대나무 숲");
     }
 }
