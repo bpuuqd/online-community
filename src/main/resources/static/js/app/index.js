@@ -1,6 +1,8 @@
 var main = {
+
     init : function() {
         var _this = this;
+
         $('#btn-save').on('click', function () {
                _this.save();
         });
@@ -8,6 +10,7 @@ var main = {
         $('#btn-update').on('click',function() {
             _this.update();
         });
+
         $('#btn-delete').on('click',function() {
              _this.delete();
         });
@@ -16,7 +19,8 @@ var main = {
         var data = {
             title: $('#title').val(),
             author: $('#author').val(),
-            content: $('#content').val()
+            content: $('#content').val(),
+            writerId: $('#writerId').val()
         };
 
         $.ajax({
@@ -75,3 +79,4 @@ var main = {
 };
 
 main.init();
+

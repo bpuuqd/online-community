@@ -35,7 +35,7 @@ h1 {
     margin-bottom : 0px;
 }
 
-
+/*모두의 대나무슾*/
 .main-header {
         color : #A69E81;
         font-weight: 700;
@@ -76,9 +76,9 @@ h1 {
 }
 
 .post-header{
-       color : #A69E81;
+       color : #B4BFBC;;
         font-weight: 700;
-        font-size: 50px;
+        font-size: 28px;
 }
 
 .col-md-4 {
@@ -86,7 +86,18 @@ h1 {
 }
 
 .update-header{
-        color : #A69E81;
+        color : #B4BFBC;;
         font-weight: 700;
-        font-size: 50px;
+        font-size: 28px;
+}
+
+.post-read-header{
+               color : #B4BFBC;;
+               font-weight: 700;
+               font-size: 28px;
+}
+
+.form-control[readonly]{
+        background-color: #ffffff;
+
 }

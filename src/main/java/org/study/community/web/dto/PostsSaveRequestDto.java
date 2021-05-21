@@ -8,14 +8,18 @@ import org.study.community.domain.posts.Posts;
 @Getter
 @NoArgsConstructor
 public class PostsSaveRequestDto {
+
     private String title;
     private String content;
     private String author;
+    private Long writerId;
+
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author){
+    public PostsSaveRequestDto(String title, String content, String author, Long writerId){
         this.title = title;
         this.content = content;
         this.author = author;
+        this.writerId = writerId;
     }
 
     public Posts toEntity() {
@@ -23,6 +27,7 @@ public class PostsSaveRequestDto {
                 .title(title)
                 .content(content)
                 .author(author)
+                .writerId(writerId)
                 .build();
     }
 }
