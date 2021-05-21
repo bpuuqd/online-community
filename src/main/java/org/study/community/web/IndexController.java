@@ -1,6 +1,7 @@
 package org.study.community.web;
 
 import lombok.RequiredArgsConstructor;
+import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +46,9 @@ public class IndexController {
             if(user.getId().equals(dto.getWriterId())){
                 model.addAttribute("writerName", true);
             }
+           if(user.getRoleKey().equals("ROLE_ADMIN")){
+               model.addAttribute("isAdmin",true);
+           }
         }
         return "posts-read";
     }
