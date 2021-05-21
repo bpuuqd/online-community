@@ -36,7 +36,7 @@ h1 {
 }
 
 
-.mainHeader {
+.main-header {
         color : #A69E81;
         font-weight: 700;
         font-size: 50px;
@@ -75,7 +75,7 @@ h1 {
         width: 20%
 }
 
-.post-title{
+.post-header{
        color : #A69E81;
         font-weight: 700;
         font-size: 50px;
@@ -83,4 +83,10 @@ h1 {
 
 .col-md-4 {
         max-width: none;
+}
+
+.update-header{
+        color : #A69E81;
+        font-weight: 700;
+        font-size: 50px;
 }

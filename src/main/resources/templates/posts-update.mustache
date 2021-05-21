@@ -1,14 +1,14 @@
 {{>layout/header}}
 
-<h1>글 수정</h1>
+<h1 class="update-header">다시 소리치기</h1>
 
 <div class="col-md-12">
     <div class="col-md-4">
         <form>
-            <div class="form-group">
-                <label for="id">글 번호</label>
-                <input type="text" class="form-control" id="id" value="{{post.id}}" readonly>
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label for="id">글 번호</label>-->
+                <input type="hidden" class="form-control" id="id" value="{{post.id}}" readonly>
+<!--            </div>-->
             <div class="form-group">
                 <label for="title">제목</label>
                 <input type="text" class="form-control" id="title" value="{{post.title}}">
