@@ -101,3 +101,7 @@ h1 {
         background-color: #ffffff;
 
 }
+
+textarea.form-control {
+        height: 200px;
+ }

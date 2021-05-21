@@ -22,7 +22,7 @@
         </form>
         <a href="/" role="button" class="btn btn-secondary">목록으로</a>
         {{#writerName}}
-        <button type="button" class="btn btn-primary" id="btn-update">수정하기</button>
+        <a href="/posts/update/{{post.id}}" type="button" class="btn btn-primary">수정하기</a>
         <button type="button" class="btn btn-danger" id="btn-delete">삭제</button>
         {{/writerName}}
     </div>
