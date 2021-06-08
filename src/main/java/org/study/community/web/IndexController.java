@@ -2,14 +2,21 @@ package org.study.community.web;
 
 import lombok.RequiredArgsConstructor;
 import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.study.community.config.auth.LoginUser;
 import org.study.community.config.auth.dto.SessionUser;
 import org.study.community.service.PostsService;
+import org.study.community.web.dto.PostsListResponseDto;
 import org.study.community.web.dto.PostsResponseDto;
+
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -19,8 +26,12 @@ public class IndexController {
     private final PostsService postsService;
 
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user) {
-        model.addAttribute("posts", postsService.findAllDesc());
+    public String index(Model model, @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, @LoginUser SessionUser user) {
+
+//        model.addAttribute("posts", postsService.findAllDesc());
+        model.addAttribute("posts",postsService.getPageList(pageable));
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
 
         if(user != null){
             model.addAttribute("userName", user.getName());
@@ -63,4 +74,18 @@ public class IndexController {
     }
 
 
+
+    @GetMapping("/posts/search")
+    public String search(String keyword, @PageableDefault(size = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Model model, @LoginUser SessionUser user) {
+        model.addAttribute("posts", postsService.searchPosts(keyword, pageable));
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("keyword", keyword);
+
+        if(user != null){
+            model.addAttribute("userName", user.getName());
+        }
+
+        return "search-page";
+    }
 }

@@ -41,6 +41,20 @@
     {{/posts}}
     </tbody>
 </table>
+    <form action="/posts/search" method="GET">
+        <div>
+            <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+        </div>
+
+        <button>검색하기</button>
+    </form>
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="?page={{next}}">Next</a>
+        </li>
+    </ul>
+
 </div>
 
 {{>layout/footer}}

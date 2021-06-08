@@ -1,0 +1,60 @@
+{{>layout/header}}
+
+
+<div class="col-md-12">
+    <!-- 로그인 기능 영역-->
+    <div class="row">
+        <div class="col-md-6">
+            <a href="/posts/save" role="button" class="btn btn-primary">소리치기</a>
+            <div class="login-btns">
+                {{#userName}}
+                    Logged in as: <span id = "user">{{userName}}</span>
+                    <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+                {{/userName}}
+                {{^userName}}
+                    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+
+                    <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+                {{/userName}}
+            </div>
+        </div>
+    </div>
+
+    <!-- 목록 출력 영역 -->
+    <table class="table table-horizontal table-bordered">
+        <thead class="thead-strong">
+        <tr>
+            <th class="th-span1">NO</th>
+            <th class="th-span2">Title</th>
+            <th class="th-span3">Writer</th>
+            <th class="th-span4">Date</th>
+        </tr>
+        </thead>
+        <tbody id="tbody">
+        {{#posts}}
+            <tr>
+                <td>{{id}}</td>
+                <td><a href="/posts/read/{{id}}">{{title}}</a></td>
+                <td>{{author}}</td>
+                <td>{{modifiedDate}}</td>
+            </tr>
+        {{/posts}}
+        </tbody>
+    </table>
+    <form action="/posts/search" method="GET">
+        <div>
+            <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+        </div>
+
+        <button>검색하기</button>
+    </form>
+    <ul class="pagination justify-content-center">
+        <li class="page-item"><a class="page-link" href="?keyword={{keyword}}&page={{previous}}">Previous</a>
+        </li>
+        <li class="page-item"><a class="page-link" href="?keyword={{keyword}}&page={{next}}">Next</a>
+        </li>
+    </ul>
+
+</div>
+
+{{>layout/footer}}
