@@ -15,6 +15,7 @@ import org.study.community.web.dto.PostsResponseDto;
 import org.study.community.web.dto.PostsSaveRequestDto;
 import org.study.community.web.dto.PostsUpdateRequestDto;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,33 +57,39 @@ public class PostsService {
 
     //paging
     @Transactional
-    public Page<PostsListResponseDto> getPageList(Pageable pageable){
-        return postsRepository.findAll(pageable)
-                .map(PostsListResponseDto::new);
+    public List<PostsListResponseDto> getPageList(Integer pageNum){
+        Sort sort = Sort.by(Sort.Order.desc("createdDate"));
+        Pageable pageable = PageRequest.of(pageNum -1 , PAGE_POST_COUNT, sort);
+        return postsRepository.findAll(pageable).stream()
+                .map(PostsListResponseDto::new).collect(Collectors.toList());
     }
 
+
+    @Transactional
+    public Integer getPrev(Integer pageNum){
+        Sort sort = Sort.by(Sort.Order.desc("createdDate"));
+        Pageable pageable = PageRequest.of(pageNum -1 , PAGE_POST_COUNT, sort);
+
+        return pageable.previousOrFirst().getPageNumber();
+    }
+
+    @Transactional
+    public Integer getNext(Integer pageNum){
+        Sort sort = Sort.by(Sort.Order.desc("createdDate"));
+        Pageable pageable = PageRequest.of(pageNum -1 , PAGE_POST_COUNT, sort);
+
+        return pageable.next().getPageNumber();
+    }
 
     //searching
     @Transactional
-    public Page<PostsListResponseDto> searchPosts(String keyword, Pageable pageable) {
-        // List<BoardEntity> boardEntities = PostsRepository.findByTitleContaining(keyword);
-        //List<BoardDto> boardDtoList = new ArrayList<>();
+    public List<PostsListResponseDto> searchPosts(String keyword, Integer pageNum) {
+        Sort sort = Sort.by(Sort.Order.desc("createdDate"));
+        Pageable pageable = PageRequest.of(pageNum -1 , PAGE_POST_COUNT, sort);
+        return postsRepository.findByTitleContaining(keyword, pageable).stream()
+                .map(PostsListResponseDto::new).collect(Collectors.toList());
 
-//        if (boardEntities.isEmpty()) return boardDtoList;
-//
-//        for (BoardEntity boardEntity : boardEntities) {
-//            boardDtoList.add(this.convertEntityToDto(boardEntity));
-//        }
-
-
-        return postsRepository.findByTitleContaining(keyword, pageable).map(PostsListResponseDto::new);
     }
-
-
-
-
-
-
 
 
     @Transactional
@@ -93,13 +100,9 @@ public class PostsService {
         postsRepository.delete(posts);
     }
 
-    @Transactional
-    public Long getPostsCount(){
-        return postsRepository.count();
-    }
 
-    public Integer[] getPageList(Integer curPageNum) {
-        Integer[] pageList = new Integer[BLOCK_PAGE_NUM_COUNT];
+    public List<Integer> getPageNum(Integer curPageNum) {
+        List<Integer> pageList = new ArrayList<>();
 
         //total posts count
         Double postsTotalCount = Double.valueOf(this.getPostsCount());
@@ -116,11 +119,15 @@ public class PostsService {
 
         //set PageNum
         for(int val =curPageNum, idx =0; val <= blockLastPageNum; val++, idx++){
-            pageList[idx] = val;
+            pageList.add(val);
         }
         return pageList;
     }
 
+    @Transactional
+    public Long getPostsCount(){
+        return postsRepository.count();
+    }
 
     }
 

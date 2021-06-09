@@ -51,6 +51,9 @@
     <ul class="pagination justify-content-center">
         <li class="page-item"><a class="page-link" href="?page={{previous}}">Previous</a>
         </li>
+        {{#pageNum}}
+            <li class="page-item"><a class="page-link" href="?page={{this}}">{{this}}</a></li>
+        {{/pageNum}}
         <li class="page-item"><a class="page-link" href="?page={{next}}">Next</a>
         </li>
     </ul>

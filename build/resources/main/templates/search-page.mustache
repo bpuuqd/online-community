@@ -49,9 +49,12 @@
         <button>검색하기</button>
     </form>
     <ul class="pagination justify-content-center">
-        <li class="page-item"><a class="page-link" href="?keyword={{keyword}}&page={{previous}}">Previous</a>
+        <li class="page-item"><a class="page-link" href="/posts/search?keyword={{keyword}}&page={{previous}}">Previous</a>
         </li>
-        <li class="page-item"><a class="page-link" href="?keyword={{keyword}}&page={{next}}">Next</a>
+        {{#pageNum}}
+            <li class="page-item"><a class="page-link" href="?page={{this}}">{{this}}</a></li>
+        {{/pageNum}}
+        <li class="page-item"><a class="page-link" href="/posts/search?keyword={{keyword}}&page={{next}}">Next</a>
         </li>
     </ul>
 

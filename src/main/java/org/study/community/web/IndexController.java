@@ -26,12 +26,13 @@ public class IndexController {
     private final PostsService postsService;
 
     @GetMapping("/")
-    public String index(Model model, @PageableDefault(size = 5, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, @LoginUser SessionUser user) {
+    public String index(Model model, @RequestParam(value= "page", defaultValue = "1") Integer pageNum, @LoginUser SessionUser user) {
 
 //        model.addAttribute("posts", postsService.findAllDesc());
-        model.addAttribute("posts",postsService.getPageList(pageable));
-        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("posts",postsService.getPageList(pageNum));
+        model.addAttribute("previous", postsService.getPrev(pageNum));
+        model.addAttribute("next", postsService.getNext(pageNum));
+        model.addAttribute("pageNum", postsService.getPageNum(pageNum));
 
         if(user != null){
             model.addAttribute("userName", user.getName());
@@ -76,11 +77,16 @@ public class IndexController {
 
 
     @GetMapping("/posts/search")
-    public String search(String keyword, @PageableDefault(size = 2, sort = "id", direction = Sort.Direction.DESC) Pageable pageable, Model model, @LoginUser SessionUser user) {
-        model.addAttribute("posts", postsService.searchPosts(keyword, pageable));
-        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-        model.addAttribute("next", pageable.next().getPageNumber());
+    public String search(String keyword, Model model, @RequestParam(value= "page", defaultValue = "1") Integer pageNum, @LoginUser SessionUser user) {
+
+        model.addAttribute("posts",postsService.searchPosts(keyword, pageNum));
+        model.addAttribute("previous", postsService.getPrev(pageNum));
+        model.addAttribute("next", postsService.getNext(pageNum));
+        model.addAttribute("pageNum", postsService.getPageNum(pageNum));
+
         model.addAttribute("keyword", keyword);
+
+
 
         if(user != null){
             model.addAttribute("userName", user.getName());
